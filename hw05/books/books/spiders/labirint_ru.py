@@ -24,9 +24,9 @@ class LabirintRuSpider(CrawlSpider):
         if next_page:
             yield response.follow(next_page, callback=self.parse)
 
-        urls_vacancies = response.xpath(self.xpath_book).getall()
-        for url_vacancy in urls_vacancies:
-            yield response.follow(url_vacancy, callback=self.parse_book)
+        urls = response.xpath(self.xpath_book).getall()
+        for url in urls:
+            yield response.follow(url, callback=self.parse_book)
 
     def parse_book(self, response: HtmlResponse):
         name = response.xpath("//div[@class='prodtitle']/h1//text()").get()
